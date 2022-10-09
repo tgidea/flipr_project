@@ -77,5 +77,8 @@ app.use('/auth',authRoutes);
 app.use('/admin',adminRoutes);
 app.use('/employee',employeeRoutes);
 
+app.get('*',(req,res)=>{
+    res.send("no such route present");
+})
 const port = process.env.PORT || 5003;
 app.listen(port, () => console.log(`Server started at ${5003}`));
