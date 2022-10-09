@@ -1,0 +1,23 @@
+<div class="dashboard-header">
+    <nav class="navbar navbar-expand-lg bg-white ">
+        <a class="navbar-brand" href="#">Track On</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i style="color: var(--blue);" class="fas fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto navbar-right-top">                                                
+                <li class="nav-item dropdown nav-user">
+                    <a style="display: flex;justify-content:center;height: 50px;" class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://img.icons8.com/dusk/100/000000/user-male-circle.png" alt="" class="user-avatar-md rounded-circle"></a>
+                    <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                        <div class="nav-user-info">
+                            <h5 style="background-color:var(--blue);" class="mb-0 text-white nav-user-name"><%-username%></h5>                            
+                        </div>
+                        <a class="dropdown-item" href="#account"><i class="fas fa-user mr-2"></i>Account</a>
+                        <a class="dropdown-item" href="#setting"><i class="fas fa-cog mr-2"></i>Setting</a>
+                        <a class="dropdown-item" href="/auth/logout"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,44 @@
+
+<div class="container" style="width: 100%;">
+    <div class="main">
+        <div class="main-center">
+        <h5>Add new Task</h5>
+            <form class="" method="post" action="/employee/addTask">                
+                <div class="form-group">
+                    <label for="name">Enter Time</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="time" name="start" id="name" placeholder="Start Time" required>        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Duration of task</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input  min="1" max="999" type="number" name="end" id="end" placeholder="Duration of task" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Choose category</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>                        
+                        <select name="category" id="category" required>
+                            <option value="meeting">Meeting</option>
+                            <option value="break">Break</option>
+                            <option value="work">Work</option>            
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Description</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <textarea type="text" name="description" id="description" placeholder="Description">  </textarea>      
+                    </div>
+                </div>                
+                <button type="submit">Add Task</button>                
+            </form>
+        </div><!--main-center"-->
+    </div><!--main-->
+</div>

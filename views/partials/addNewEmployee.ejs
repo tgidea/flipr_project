@@ -1,0 +1,56 @@
+<div class="container" style="width: 100%;">
+    <div class="main">
+        <div class="main-center">
+        <h5>Add new Employee</h5>
+            <form class="" method="post" action="/admin/addEmployee">                
+                <div class="form-group">
+                    <label for="name">Employee Name</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input minlength="3" type="text" class="form-control" name="name" id="name"  placeholder="Enter employee Name" required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Employee Email</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="email" placeholder="Enter employee Email" required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Employee Department</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <input  type="text" class="form-control" name="department" id="department"  placeholder="Enter employee department" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Employee Joining Date</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <input type="date" class="form-control" name="joining" id="joining"  placeholder="Enter joining date" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Employee Contact Number</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <input min="1000000000" maxlength="9999999999" type="number" class="form-control" name="contact" id="contact"  placeholder="Enter Contact Number" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input minlength="4" type="password" class="form-control" name="password" placeholder="Enter your Password" required/>
+                        </div>
+                </div>
+
+                <button type="submit">Add Employee</button>
+                
+            </form>
+        </div><!--main-center"-->
+    </div><!--main-->
+</div>

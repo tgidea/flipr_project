@@ -1,0 +1,22 @@
+body { 
+    background-color: yellow;
+    font-size: 13px; 
+}
+.tabulator-col-title {
+  font-size: small;
+}
+.tabulator-cell {
+  font-size: small;
+}
+.tabulator-col-content {
+  font-size: small;
+}
+.container {
+  height:100%;
+}
+@media only screen and (max-width: 500px) {
+    #section{
+        display: flex;
+        flex-direction: column;
+    }
+  }

@@ -1,0 +1,66 @@
+<table class="table table-borderless table-responsive card-1 p-4">
+    <tr class="border-bottom">
+        <th>
+           <span class="ml-2">Name</span>
+        </th>
+        <th>
+           <span class="ml-2">Department</span>
+        </th>
+        <th>
+            <span class="ml-2">Contact</span>
+        </th>
+        <th>
+            <span class="ml-2">Joining</span>
+        </th>                    
+        <th>
+            <span class="ml-2">email</span>
+        </th>                    
+        <th>
+            <span class="ml-2">More Info</span>
+        </th>
+        <th>
+            <span class="ml-2">Active</span>
+        </th>
+    </tr>
+ 
+    <% for (var i = 0; i < employee.length; i++) { %>
+     <tr class="border-bottom">
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><%= employee[i].username %></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><%= employee[i].department %></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><%= employee[i].contact %></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><%= employee[i].joining %></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><%= employee[i].emailId %></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><a href="/admin/employee/<%= employee[i]._id %>">Daily Activity</a></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><a href="/admin/removeEmployee/<%= employee[i]._id %>"><%-employee[i].active%></a></span>                            
+            </div>
+        </td>
+       
+     </tr>    
+    <% } %>
+ </table> 
