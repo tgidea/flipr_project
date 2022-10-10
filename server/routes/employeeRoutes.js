@@ -22,7 +22,8 @@ router.get('/dashboard',checkAuth ,(req,res)=>{
         "email" : req.user.emailId,
         "contact":req.user.contact,
         "joining":req.user.joining,
-        "department":req.user.department
+        "department":req.user.department,
+        "activity":req.user.activity
         }
     )
 });

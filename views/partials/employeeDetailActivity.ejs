@@ -1,0 +1,63 @@
+<table style="display: flex;justify-content: center;" class="table table-borderless table-responsive card-1 p-4">
+    <tr class="border-bottom">
+        <th>
+           <span class="ml-2">Task Type</span>
+        </th>
+        <th>
+           <span class="ml-2">Date</span>
+        </th>
+        <th>
+           <span class="ml-2">Start</span>
+        </th>
+        <th>
+            <span class="ml-2">Duration</span>
+        </th>
+        <th>
+            <span class="ml-2">Description</span>
+        </th>                            
+    </tr>
+ 
+    <% for (var i = 0; i < activity.length; i++) { %>
+     <tr class="border-bottom">
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><%= activity[i].category %></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span  class="date d-block font-weight-bold"><%= activity[i].time%></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><%= activity[i].start%></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><%= activity[i].end%></span>                            
+            </div>
+        </td>
+        <td>
+            <div class="p-2">
+                <span class="d-block font-weight-bold"><%= activity[i].description %></span>                            
+            </div>
+        </td>      
+     </tr>    
+    <% } %>
+ </table> 
+ <script>
+     setTimeout(function(){
+        const vector = document.getElementsByClassName('date');
+        for(let i = 0 ; i<vector.length;i++){            
+            const millisec = parseInt(vector[i].innerText);            
+            const time = new Date(millisec);
+            const date = time.getDate();
+            const month = time.getMonth();
+            const year = time.getFullYear();
+            vector[i].innerText = `${date}/${month}/${year}`;
+        }
+    },10);
+    
+ </script>

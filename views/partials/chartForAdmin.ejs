@@ -26,6 +26,19 @@
               <span style="color:rgb(212, 255, 0) ;font-weight:bold;" id="break2"></span>
             </div>
         </div>
+        <br>
+        <div class="chartpie">
+            <div
+            style=" display:none;height: 200px; width: 200px; border-radius: 50%"
+            id="my-pie-chart3"
+            ></div>
+            <div id="task3" style="display: flex;flex-direction:column;">
+              <span style="color:black ; font-weight:bolder; "id="text3"></span>
+              <span style="color:#f94c0d ;font-weight:bold;" id="meet3"></span>
+              <span style="color:#098319; font-weight:bold;" id="work3"></span>
+              <span style="color:rgb(212, 255, 0) ;font-weight:bold;" id="break3"></span>
+            </div>
+        </div>
         <div class="x-axis" style="display: none;">        
             <ul class="legend">
             <li >Meeting</li>
@@ -33,6 +46,7 @@
             <li>Break</li>          
             </ul>      
         </div>
+        <%- include('./employeeDetailActivity.ejs') %>
     </div>
   <script>
 
@@ -53,7 +67,8 @@
 
       // running for loop on array of tasks
       for (var i = arr.length - 1; i >= 0; i--) {
-        var taskTime = parseInt(arr[i].time);        
+        var taskTime = parseInt(arr[i].time);  
+        var originalTaskTime = taskTime;       
         var category = arr[i].category.toLowerCase();
         var start = arr[i].start;
         var duration = arr[i].end;
@@ -64,27 +79,20 @@
         var dayDiff = dayToday - taskDay;
         var currMonth = d.getMonth();
         var taskMonth = taskTime.getMonth();
-        if (
-          (currMonth - taskMonth > 1 && currMonth - taskMonth >= 0) ||
-          (currMonth == 0 && taskDate < 10) ||
-          d.getFullYear() - taskTime.getFullYear() > 1
-        ) {
+         // task is of more than 7 days;
+        if (Date.now()-originalTaskTime>604700000) {
           continue;
         }
 
-        // if taskdate is of previous 7 days store in <catogoy> variable
-        if (
-          (dateToday - taskDate <= 7 && dateToday - taskDate >= 0) ||
-          (dateToday > 0 && dateToday < 7 && taskDate >= 30 - dateToday)
-        ) {
-          if (category == "break") {
-            breaks += parseInt(duration);
-          } else if (category == "meeting") {
-            meeting += parseInt(duration);
-          } else {
-            work += parseInt(duration);
-          }
+        // if taskdate is of previous 7 days store in <catogoy> variable        
+        if (category == "break") {
+          breaks += parseInt(duration);
+        } else if (category == "meeting") {
+          meeting += parseInt(duration);
+        } else {
+          work += parseInt(duration);
         }
+      
 
         // if task date is today task assign data to <category>1 
         // else if task date is yesterday assign data to <category>2
@@ -110,55 +118,39 @@
         }
       }
       // changing number to degree for represent
-      const pie1 = meeting1 + work1 + breaks1;
-      const piemeet1 = Math.floor((meeting1 / pie1) * 360);
-      const piebre1 = Math.floor((breaks1 / pie1) * 360);
-      const piewo1 = Math.floor((work1 / pie1) * 360);
+      const createChart = function(meetingD,breaksD,workD,index){
+      const pie = meetingD + workD + breaksD;
+      const piemeet1 = Math.floor((meetingD / pie) * 360);
+      const piebre1 = Math.floor((breaksD / pie) * 360);
+      const piewo1 = Math.floor((workD / pie) * 360);
 
-      const pie2 = meeting2 + work2 + breaks2;
-      const piemeet2 = Math.floor((meeting2 / pie2) * 360);
-      const piebre2 = Math.floor((breaks2 / pie2) * 360);
-      const piewo2 = Math.floor((work2 / pie2) * 360);
-    
-      // filling pie chart1
-      if (pie1 > 0) {
+      if (pie > 0) {
         document.getElementById(
-          "my-pie-chart1"
+          `my-pie-chart${index}`
         ).style.background = `conic-gradient(red 0deg, red ${piemeet1}deg, yellow ${piemeet1}deg, yellow ${
           piemeet1 + piebre1
         }deg, green ${piemeet1 + piebre1}deg)`;
         
         // displayin pie chart details in %
-        document.getElementById(`my-pie-chart1`).style.display = `flex`;
-        document.getElementById(`text1`).innerText = `Today`;
-        document.getElementById(`meet1`).innerText = `Meeting : ${Math.floor((meeting1/pie1)*100)}%`;
-        document.getElementById(`work1`).innerText = `Work : ${Math.floor((work1/pie1)*100)}%`;
-        document.getElementById(`break1`).innerText = `Break : ${Math.floor((breaks1/pie1)*100)}%`;
+        let day = "TODAY"
+        if(index==2)day = "YESTERDAY";
+        if(index==3)day = "WEEK"
+        document.getElementById(`my-pie-chart${index}`).style.display = `flex`;
+        document.getElementById(`text${index}`).innerText = `${day}`;
+        document.getElementById(`meet${index}`).innerText = `Meeting : ${Math.floor((meetingD/pie)*100)}%`;
+        document.getElementById(`work${index}`).innerText = `Work : ${Math.floor((workD/pie)*100)}%`;
+        document.getElementById(`break${index}`).innerText = `Break : ${Math.floor((breaksD/pie)*100)}%`;
         document.getElementsByClassName(`x-axis`)[0].style.display = "block";
         document.getElementById(`status`).innerText = "";
       }
       else{
-        document.getElementById('task1').style.display = "none";
+        document.getElementById(`task${index}`).style.display = "none";
       }
-    // filling pie chart2
-      if (pie2 > 0) {
-        document.getElementById(
-          "my-pie-chart2"
-        ).style.background = `conic-gradient(red 0deg, red ${piemeet2}deg, yellow ${piemeet2}deg, yellow ${
-          piemeet2 + piebre2
-        }deg, green ${piemeet2 + piebre2}deg)`;
+    }
+    createChart(meeting1,breaks1,work1,1);
+    createChart(meeting2,breaks2,work2,2);
+    createChart(meeting,breaks,work,3);
 
-        document.getElementById(`my-pie-chart2`).style.display = `flex`;
-        document.getElementById(`text2`).innerText = `Yesterday`;
-        document.getElementById(`meet2`).innerText = `Meeting : ${Math.floor((meeting2/pie2)*100)}%`;
-          document.getElementById(`work2`).innerText = `Work : ${Math.floor((work2/pie2)*100)}%`;
-          document.getElementById(`break2`).innerText = `Break : ${Math.floor((breaks2/pie2)*100)}%`;
-          document.getElementsByClassName(`x-axis`)[0].style.display = "block";
-          document.getElementById(`status`).innerText = "";
-      }
-      else{
-        document.getElementById('task2').style.display = "none";
-      }
 
     }    
     const ref = window.location.href.split("/")[5];

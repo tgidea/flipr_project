@@ -44,7 +44,7 @@ router.get('/employee/:id',checkAuth,async(req,res)=>{
     try{
        const id = req.params.id;
        const employeeInfo =  await Employee.findOne({"_id": mongoose.Types.ObjectId(`${id}`)})
-       res.render('employee_admin_activity');       
+       res.render('employee_admin_activity',{"activity":employeeInfo.activity});       
     }
     catch(err){
         console.log(err);
@@ -96,7 +96,12 @@ router.post('/addEmployee',checkAuth ,async(req,res)=>{
                 const email = req.body.email.toString().trim();
                 const department = req.body.department.toString().trim();
                 const password = req.body.password.toString().trim();
+                
+                const present1 = await Admin.findOne({"emailId":email});
+                const present2 = await Employee.findOne({"emailId":email});
+
                 if(password.length<4)return res.send("Password length<4");
+                if(present1 || present2)return res.send("Email Already Exist");
 
                 const collect = new Employee({
                     "username":req.body.name,
