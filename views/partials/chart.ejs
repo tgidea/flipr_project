@@ -7,11 +7,11 @@
           id="my-pie-chart1"
           ></div>
           <div id="task1" style="display: flex;flex-direction:column;">
-              <span style="color:black ; font-weight:bolder;" id="text1"></span>
-              <span style="color:#f94c0d ;font-weight:bold;" id="meet1"></span>
-              <span style="color:#098319; font-weight:bold;" id="work1"></span>
-              <span style="color:rgb(212, 255, 0) ;font-weight:bold;" id="break1"></span>
-          </div>
+            <span style="color:black ; font-weight:bolder;" id="text1"></span>
+            <span style="color:#ff00e9 ;font-weight:bold;" id="meet1"></span>
+            <span style="color:#5be95b; font-weight:bold;" id="work1"></span>
+            <span style="color:#ffc107 ;font-weight:bold;" id="break1"></span>
+        </div>
       </div>
       <br>
       <div class="chartpie">
@@ -21,10 +21,21 @@
           ></div>
           <div id="task2" style="display: flex;flex-direction:column;">
             <span style="color:black ; font-weight:bolder; "id="text2"></span>
-            <span style="color:#f94c0d ;font-weight:bold;" id="meet2"></span>
-            <span style="color:#098319; font-weight:bold;" id="work2"></span>
-            <span style="color:rgb(212, 255, 0) ;font-weight:bold;" id="break2"></span>
+            <span style="color:#ff00e9 ;font-weight:bold;" id="meet2"></span>
+            <span style="color:#5be95b; font-weight:bold;" id="work2"></span>
+            <span style="color:#ffc107 ;font-weight:bold;" id="break2"></span>
           </div>
+      </div>
+      <br>
+      <div class="chartpie">            
+        <div id="barChart" class="col-6 offset-1 my-3">
+          <div class="card">
+              <div class="card-body">
+                  Time vs Date                
+                  <canvas id="myChart" width="200" height="200" ></canvas>                
+              </div>
+          </div>
+      </div>
       </div>
       <br>
       <div class="chartpie">
@@ -34,9 +45,9 @@
         ></div>
         <div id="task3" style="display: flex;flex-direction:column;">
           <span style="color:black ; font-weight:bolder; "id="text3"></span>
-          <span style="color:#f94c0d ;font-weight:bold;" id="meet3"></span>
-          <span style="color:#098319; font-weight:bold;" id="work3"></span>
-          <span style="color:rgb(212, 255, 0) ;font-weight:bold;" id="break3"></span>
+          <span style="color:#ff00e9 ;font-weight:bold;" id="meet3"></span>
+          <span style="color:#5be95b; font-weight:bold;" id="work3"></span>
+          <span style="color:#ffc107 ;font-weight:bold;" id="break3"></span>
         </div>
     </div>
       <div class="x-axis" style="display: none;">        
@@ -49,53 +60,165 @@
   </div>
 <script>
 
-  function showPie(arr) {
-    console.log(arr.length);
-    let meeting = 0,
-      breaks = 0,
-      work = 0;
-    let meeting1 = 0,
-      breaks1 = 0,
-      work1 = 0;
-    let meeting2 = 0,
-      breaks2 = 0,
-      work2 = 0;
-    var d = new Date(Date.now());
-    var dateToday = d.getDate();
-    var dayToday = d.getDay();
 
-    // running for loop on array of tasks
-    for (var i = arr.length - 1; i >= 0; i--) {
-      var taskTime = parseInt(arr[i].time); 
-      var originalTaskTime = taskTime;       
-      var category = arr[i].category.toLowerCase();
-      var start = arr[i].start;
-      var duration = arr[i].end;
-      
-      taskTime = new Date(taskTime);
-      var taskDate = taskTime.getDate();
-      var taskDay = taskTime.getDay();
-      var dayDiff = dayToday - taskDay;
-      var currMonth = d.getMonth();
-      var taskMonth = taskTime.getMonth();
+if(screen.availWidth<500){
 
-      // task is of more than 7 days;
-      if (Date.now()-originalTaskTime>604700000) {
-        continue;
+  const para = document.getElementById('barChart');
+  if (para.classList.contains('col-6')) {
+      para.classList.remove('col-6');
+      para.classList.add('col-12');
+  }
+}
+async function showBar(obj){
+      try{
+        var labels=[];
+        var meeting = [];
+        var work = [];
+        var rest = [];
+        labels.sort();
+        
+        Object.keys(obj).forEach(function(key,index) {  
+          labels.push(key);        
+          meeting.push(obj[`${key}`].meeting)
+          work.push(obj[`${key}`].work)
+          rest.push(obj[`${key}`].break)
+        });
+        
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Meeting',
+                    data: meeting,
+                    backgroundColor: [
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                    ],
+                    borderColor: [
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',
+                        'rgb(255, 0, 233)',                                              
+                    ],
+                    borderWidth: 1
+                },{
+                    label: 'Break',
+                    data: rest,
+                    backgroundColor: [
+                        'rgb(255, 193, 7)',
+                        'rgb(255, 193, 7)',
+                        'rgb(255, 193, 7)',
+                        'rgb(255, 193, 7)',
+                        'rgb(255, 193, 7)',
+                        'rgb(255, 193, 7)',
+                        'rgb(255, 193, 7)',                       
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                },{
+                    label: 'Work',
+                    data: work,
+                    backgroundColor: [
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',                        
+                        'rgb(91, 233, 91)',                        
+                    ],
+                    borderColor: [
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',
+                        'rgb(91, 233, 91)',                        
+                        'rgb(91, 233, 91)',                        
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {                        
+                        stacked:true
+                    },
+                    x :{
+                        stacked:true
+                    }
+                }
+            }
+        });
       }
-
-      // if taskdate is of previous 7 days store in <catogoy> variable     
-      if (category == "break") {
-        breaks += parseInt(duration);
-      } else if (category == "meeting") {
-        meeting += parseInt(duration);
-      } else {
-        work += parseInt(duration);
+      catch(err){
+        console.log(err);
       }
+    }
     
-
-      // if task date is today task assign data to <category>1 
-      // else if task date is yesterday assign data to <category>2
+  function showPie(arr) {
+    var datasKaSet = [];
+      const dataSet = {     
+      } 
+    
+      let meeting = 0, breaks = 0, work = 0 , meeting1 = 0, breaks1 = 0, work1 = 0 , meeting2 = 0, breaks2 = 0, work2 = 0;
+      var d = new Date(Date.now());
+      var dateToday = d.getDate();
+      var dayToday = d.getDay();
+      
+      // running for loop on array of tasks
+      for (var i = arr.length - 1; i >= 0; i--) {
+        var taskTime = parseInt(arr[i].time) , originalTaskTime = taskTime;
+        var category = arr[i].category.toLowerCase() , start = arr[i].start , duration = arr[i].end;
+        
+        taskTime = new Date(taskTime);
+        var taskDate = taskTime.getDate() , taskDay = taskTime.getDay() , dayDiff = dayToday - taskDay ,currMonth = d.getMonth(), taskMonth = taskTime.getMonth();
+         
+        // task is of more than 7 days;
+        if (Date.now()-originalTaskTime>604700000) {
+          continue;
+        }
+        
+        // if taskdate is of previous 7 days store in <catogoy> variable  
+        if(dataSet[`${taskDate}`]==undefined){
+          datasKaSet.push(taskDate);
+          const obj = {
+            "break":0,
+            "meeting":0,
+            "work":0
+          }
+          dataSet[`${taskDate}`] = obj;           
+        }      
+        if (category == "break") {
+          breaks += parseInt(duration);          
+          dataSet[`${taskDate}`].break += parseInt(duration);          
+        } else if (category == "meeting") {            
+          dataSet[`${taskDate}`].meeting += parseInt(duration);            
+          meeting += parseInt(duration);
+        } else {
+          work += parseInt(duration);
+          dataSet[`${taskDate}`].work += parseInt(duration);                      
+        }        
+        // if task date is today task assign data to <category>1 
+        // else if task date is yesterday assign data to <category>2
       if (taskDate == dateToday) {
         if (category == "break") {
           breaks1 += parseInt(duration);
@@ -128,9 +251,10 @@
       if (pie > 0) {
         document.getElementById(
           `my-pie-chart${index}`
-        ).style.background = `conic-gradient(red 0deg, red ${piemeet1}deg, yellow ${piemeet1}deg, yellow ${
+        ).style.background = `conic-gradient(#ff00e9 0deg, #ff00e9 ${piemeet1}deg, #ffc107 ${piemeet1}deg, #ffc107 ${
           piemeet1 + piebre1
-        }deg, green ${piemeet1 + piebre1}deg)`;
+        }deg, #5be95b ${piemeet1 + piebre1}deg)`;
+        
         
         // displayin pie chart details in %
         let day = "TODAY"
@@ -151,6 +275,7 @@
     createChart(meeting1,breaks1,work1,1);
     createChart(meeting2,breaks2,work2,2);
     createChart(meeting,breaks,work,3);
+    showBar(dataSet)
 
 
   }
@@ -160,7 +285,8 @@
       })
       .then((data) => {
         showPie(data.response);        
-        console.log(data);
+        // console.log(data);
       });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>

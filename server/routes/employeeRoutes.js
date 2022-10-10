@@ -49,11 +49,15 @@ router.post('/addTask',checkAuth,async(req,res)=>{
         const category = req.body.category;
         const description = req.body.description;
         
+
+        //depending on where server is hosted this d should be changed
+
         var d = Date(Date.now()) ;
         var time1 = d.split(" ")[4].split(":") , time2 = start.split(":");
         var hrs1 = time1[0] , min1 = time1[1];
         var hrs2 = time2[0] , min2 = time2[1];
-        if(hrs2>hrs1 || (hrs1==hrs2 && min2>min1)){
+        // this 19800000 is because server is hosted on USA and UTC time is refered.
+        if((hrs2-1980000)>hrs1 || (hrs1==hrs2 && min2>min1)){
             return res.send("Future time cann't be set");
         }
         var objTask = { start , end , category,description };

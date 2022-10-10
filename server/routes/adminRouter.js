@@ -44,7 +44,7 @@ router.get('/employee/:id',checkAuth,async(req,res)=>{
     try{
        const id = req.params.id;
        const employeeInfo =  await Employee.findOne({"_id": mongoose.Types.ObjectId(`${id}`)})
-       res.render('employee_admin_activity',{"activity":employeeInfo.activity});       
+       res.render('employee_admin_activity',{"activity":employeeInfo.activity,"username":req.user.username});       
     }
     catch(err){
         console.log(err);
