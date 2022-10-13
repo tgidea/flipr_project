@@ -21,11 +21,11 @@ passport.deserializeUser((id,done)=>{
         else{
             // find then employee
             Employee.findById({"_id":mongoose.Types.ObjectId(`${id}`)}).then(currentEmployee =>{
-                if(currentEmployee){                    
+                if(currentEmployee && currentEmployee.active==true){                    
                     done(null,currentEmployee);
                 }
                 else{
-                    console.log('eroor1');
+                    console.log('error in des..');
                     done(null,false);
                 }
             })
@@ -57,7 +57,7 @@ passport.use(
             else{
                 // find in employee
                 Employee.findOne({emailId}).then(currentEmploye =>{
-                    if(currentEmploye){                        
+                    if(currentEmploye && currentEmploye.active==true){                        
                         return done(null,currentEmploye);
                     }
                     else{
@@ -92,7 +92,7 @@ passport.use(new LocalStrategy ({
             else{
                 // find in employee
                 Employee.findOne({"emailId":emailId}).then(currentEmploye =>{
-                    if(currentEmploye){
+                    if(currentEmploye && currentEmploye.active==true){
                         if(currentEmploye.password!=password){
                             console.log('Invalid employee username/password');                            
                             return done(null,false);

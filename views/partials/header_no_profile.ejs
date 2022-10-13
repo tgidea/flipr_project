@@ -2,4 +2,24 @@
     <nav class="navbar navbar-expand-lg bg-white ">
         <a class="navbar-brand" href="#">Track On</a>               
     </nav>
+    <% if(flash.success && flash.success.length>0){%>
+        <h6 id="flash-msg">
+            <%=flash.success%>
+        </h6>    
+    
+    <% } else if(flash.error && flash.error.length>0){%>
+        <h6 id="flash-msg-error">
+            <%=flash.error%>
+        </h6>    
+    <%}%>
+    <script>
+        const msg = document.getElementById('flash-msg');
+        const msg_error = document.getElementById('flash-msg-error');
+        setTimeout(function(){
+            if(msg)
+                msg.style.display="none";
+            if(msg_error)
+                msg_error.style.display = "none";
+        },3000);
+    </script>
 </div>

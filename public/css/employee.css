@@ -67,13 +67,29 @@ span.input-group-addon i {
     align-items: center;
     justify-content: space-evenly;
 }
+
+
+
+#flash-msg{  
+    position: absolute;
+    right: 10px;    
+    display: flex;
+    background: #09b709;
+    color: white;    
+    border-radius: 1px; 
+    z-index: 100;   
+}
+#flash-msg-error{  
+    position: absolute;
+    right: 10px;    
+    display: flex;
+    background:#f96c0e;
+    color: white;    
+    border-radius: 1px;  
+    z-index: 100;  
+}
+
 @media screen and (min-width: 768px) {
-    h6 {
-        padding: 0;
-        width: 75px;
-        float: left;
-        line-height: 100px;
-    }
     .block {
         font-size: 1em;
     }

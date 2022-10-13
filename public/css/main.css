@@ -447,5 +447,27 @@
 .avatar.bg-primary i {
     font-size: 14px;
 }
+
+#flash-msg{  
+    position: absolute;
+    right: 10px;    
+    display: flex;
+    background: #09b709;
+    color: white;    
+    border-radius: 1px;
+    z-index: 100;    
+}
+#flash-msg-error{  
+    position: absolute;
+    right: 10px;    
+    display: flex;
+    background:#f96c0e;
+    color: white;    
+    border-radius: 1px;    
+    z-index: 100;
+}
+
 /* header css end */
+
+
 

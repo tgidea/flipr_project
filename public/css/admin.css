@@ -1,6 +1,49 @@
-body { 
-    background-color: yellow;
-    font-size: 13px; 
+body {
+  font-size: 13px;
+}
+.tabulator-col-title {
+  font-size: small;
+}
+.tabulator-cell {
+  font-size: small;
+}
+.tabulator-col-content {
+  font-size: small;
+}
+.main {
+  padding: 40px 0;
+}
+.main input,
+.main input::-webkit-input-placeholder {
+  font-size: 11px;
+  padding-top: 3px;
+}
+.ml-2 {
+  color: #009edf;
+}
+.main-center {
+  margin-top: 30px;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 10px 40px;
+  background: #009edf;
+  color: #fff;
+  text-shadow: none;
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+}
+span.input-group-addon i {
+  color: #009edf;
+  font-size: 17px;
+}
+#flash-msg {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  background: #09b709;
+  color: white;
+  border-radius: 10px;
 }
 .tabulator-col-title {
   font-size: small;
@@ -12,11 +55,29 @@ body {
   font-size: small;
 }
 .container {
-  height:100%;
+  height: 100%;
+}
+#flash-msg {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  background: #09b709;
+  color: white;
+  border-radius: 5px;
+  z-index: 100;
+}
+#flash-msg-error{
+  position: absolute;
+  right: 10px;
+  display: flex;
+  background: #f96c0e;
+  color: white;
+  border-radius: 1px;
+  z-index: 100;
 }
 @media only screen and (max-width: 500px) {
-    #section{
-        display: flex;
-        flex-direction: column;
-    }
+  #section {
+    display: flex;
+    flex-direction: column;
   }
+}

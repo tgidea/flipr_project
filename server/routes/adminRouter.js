@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Admin = require('../Schema/admin')
 const Employee = require('../Schema/user');
 const passport = require('passport');
+const e = require('connect-flash');
 // we create different instances of router.
 
 //middleware to check admin or not
@@ -24,8 +25,8 @@ router.post('/signup',async(req,res)=>{
         res.redirect('/auth/login');
     }
     catch(err){
-        console.log(err);
-        res.send({"response":"Email already exists"})
+        console.log(err);        
+        res.redirect('/auth/login');
     }
 })
 
@@ -36,7 +37,7 @@ router.get('/dashboard',checkAuth ,async(req,res)=>{
     }
     catch(err){
         console.log(err);
-        res.send('some error occured');
+        res.render('error',{"message":"Some error occured."});
     }
 });
 
@@ -79,6 +80,12 @@ router.get('/removeEmployee/:id',checkAuth,async(req,res)=>{
         toUpdate = toUpdate^employeeInfo.active;
        }
        await Employee.findOneAndUpdate({emailId:employeeInfo.emailId},{active : toUpdate})
+       if(toUpdate == false){
+           req.flash('success',"Employee disabled.")
+        }
+        else{
+           req.flash('success',"Employee enabled.")
+       }
        res.redirect('back');
     }
     catch(err){
@@ -101,19 +108,24 @@ router.post('/addEmployee',checkAuth ,async(req,res)=>{
                 const present2 = await Employee.findOne({"emailId":email});
 
                 if(password.length<4)return res.send("Password length<4");
-                if(present1 || present2)return res.send("Email Already Exist");
-
-                const collect = new Employee({
-                    "username":req.body.name,
-                    "emailId" :req.body.email ,
-                    "department" : req.body.department,
-                    "joining" : req.body.joining,
-                    "password" : req.body.password,
-                    "contact" : req.body.contact,
-                    "addBy" : req.user.username
-                });
-                await collect.save();
-                res.redirect('back');
+                if(present1 || present2){
+                    req.flash('error',"Employee already exists.")
+                    return res.redirect('back');
+                }
+                else{
+                    const collect = new Employee({
+                        "username":req.body.name,
+                        "emailId" :req.body.email ,
+                        "department" : req.body.department,
+                        "joining" : req.body.joining,
+                        "password" : req.body.password,
+                        "contact" : req.body.contact,
+                        "addBy" : req.user.username
+                    });
+                    await collect.save();
+                    req.flash('success',"Employee added.")
+                    res.redirect('back');
+                }
             }
             catch(err){
                 console.log(err);

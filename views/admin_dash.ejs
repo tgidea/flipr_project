@@ -3,57 +3,19 @@
     <head>      
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">          
+      <link rel="stylesheet" href="/css/admin.css">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>    
       <style>
-    body {         
-        font-size: 13px; 
-    }
-    .tabulator-col-title {
-    font-size: small;
-    }
-    .tabulator-cell {
-    font-size: small;
-    }
-    .tabulator-col-content {
-    font-size: small;
-    }
-    .main{
- 	padding: 40px 0;
-    }
-    .main input,
-    .main input::-webkit-input-placeholder {
-        font-size: 11px;
-        padding-top: 3px;
-    }
-    .ml-2{
-        color: #009edf;
-    }
-    .main-center{
-        margin-top: 30px;
-        margin: 0 auto;
-        max-width: 100%;
-        padding: 10px 40px;
-        background:#009edf;
-            color: #FFF;
-        text-shadow: none;
-        -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-        -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-        box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-    }
-    span.input-group-addon i {
-        color: #009edf;
-        font-size: 17px;
-    }
-
+    
     </style>
       <title>Admin</title>
     </head>
     <body>
+        <%- include('./partials/header_with_profile.ejs') %>        
         <div class="container">
-            <%- include('./partials/header_with_profile.ejs') %>
             <div id="section" class="container">
                 <div id='main'>
                     <div class='card-deck'>

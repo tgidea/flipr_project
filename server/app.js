@@ -13,6 +13,8 @@ const passportSetUp = require('./config/passport_setup');
 const cookieSession = require('cookie-session');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
+const customMildware = require('./config/middleware');
 
 const rasta = path.join(__dirname,'./config.env');
 require('dotenv').config({ path: rasta });
@@ -46,6 +48,10 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+//use after session has setup
+app.use(flash());
+app.use(customMildware.setFlash);
 
 //checking everytime user press back button
 app.use(function(req, res, next) {
